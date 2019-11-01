@@ -10,7 +10,7 @@ resource "huaweicloud_blockstorage_volume_v2" "this" {
 
 # Create Disk Attachement
 resource "huaweicloud_compute_volume_attach_v2" "this" {
-  count       = "${var.instance_id=="" ? length(var.disks) : 0}"
+  count       = "${var.instance_id=="" ? 0 : length(var.disks)}"
   instance_id = "${var.instance_id}"
   volume_id   = "${huaweicloud_blockstorage_volume_v2.this.*.id[count.index]}"
 }
